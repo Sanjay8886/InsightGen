@@ -21,8 +21,17 @@ logger = logging.getLogger("insightgen")
 
 # --- Configuration ---
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000"]}})
-
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "https://insightgen-production.up.railway.app"  # <--- THIS IS THE KEY ADDITION
+        ],
+        "supports_credentials": True,  # Recommended if you use cookies or session headers
+        "allow_headers": ["Content-Type", "Authorization", "X-Requested-With"] # Recommended to be specific
+    }
+})
 DATABASE_NAME = 'insightgen_log.db'
 LOCK = threading.Lock()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
