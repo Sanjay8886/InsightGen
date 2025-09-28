@@ -6,42 +6,47 @@ const BACKEND_URL = 'https://insight-gen-api-production.up.railway.app';
 
 // --- Global Style Reset Component (Fixes 100vh overflow issue) ---
 const GlobalStyleReset = () => (
-    <style>
-{`
-    /* CRITICAL FIX: Reset host page */
-    html, body, #root { 
+  <style>
+    {`
+      /* CRITICAL FIX: Reset host page */
+      html, body, #root { 
         margin: 0 !important;
         padding: 0 !important;
         height: 100%;
         width: 100%;
-        overflow: hidden; 
+        overflow-x: hidden; /* allow vertical scroll only */
         box-sizing: border-box;
         font-family: 'Inter', sans-serif;
         background-color: #fff;
         color: #111827;
-    }
+      }
 
-    /* Container makes table responsive */
-    .data-table-container {
+      *, *::before, *::after {
+        box-sizing: inherit;
+      }
+
+      /* Container makes table responsive */
+      .data-table-container {
         width: 100%;
         margin-top: 1rem;
         border-radius: 0.5rem;
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         border: 1px solid #E5E7EB;
         background-color: #ffffff;
-    }
+      }
 
-    /* Table base */
-    .data-table-container table {
+      /* Table base */
+      .data-table-container table {
         width: 100%;
         border-collapse: collapse;
         font-size: 0.875rem;
-        min-width: 600px; /* prevent squishing on small screens */
-    }
+        min-width: 100%; /* flexible on mobile */
+      }
 
-    /* Table header */
-    .data-table-container th {
+      /* Table header */
+      .data-table-container th {
         background-color: #F9FAFB;
         font-weight: 600;
         color: #374151;
@@ -49,40 +54,61 @@ const GlobalStyleReset = () => (
         padding: 0.75rem 0.5rem;
         border-bottom: 2px solid #E5E7EB;
         white-space: nowrap;
-    }
+      }
 
-    /* Table cells */
-    .data-table-container td {
+      /* Table cells */
+      .data-table-container td {
         padding: 0.75rem 0.5rem;
         border-bottom: 1px solid #E5E7EB;
         vertical-align: top;
         color: #111827;
-    }
+      }
 
-    /* Zebra striping */
-    .data-table-container tr:nth-child(even) {
+      /* Zebra striping */
+      .data-table-container tr:nth-child(even) {
         background-color: #F9FAFB;
-    }
+      }
 
-    /* Hover effect */
-    .data-table-container tr:hover {
+      /* Hover effect */
+      .data-table-container tr:hover {
         background-color: #F3F4F6;
-    }
+      }
 
-    /* Remove last row border */
-    .data-table-container tr:last-child td {
+      /* Remove last row border */
+      .data-table-container tr:last-child td {
         border-bottom: none;
-    }
+      }
 
-    /* Loader animation */
-    @keyframes spin {
+      /* Loader animation */
+      @keyframes spin {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
-    }
-`}
-</style>
+      }
 
+      /* Mobile responsiveness */
+      @media (max-width: 640px) {
+        .data-table-container table,
+        .data-table-container th,
+        .data-table-container td {
+          font-size: 0.75rem;
+        }
+
+        .data-table-container th,
+        .data-table-container td {
+          padding: 0.5rem 0.25rem;
+        }
+
+        /* Optional: make table headers sticky for mobile */
+        .data-table-container th {
+          position: sticky;
+          top: 0;
+          z-index: 1;
+        }
+      }
+    `}
+  </style>
 );
+
 
 // --- Helper component for responsive pure-inline styling ---
 const useResponsiveStyle = () => {
