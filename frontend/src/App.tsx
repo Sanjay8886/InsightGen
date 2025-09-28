@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, FormEvent } from 'react';
 import { Menu, Zap, Upload, FileText, Send, X, Plus, Mic, CheckCircle, AlertTriangle, Loader2, Code, Table } from 'lucide-react';
 
 // --- Configuration ---
-const BACKEND_URL = 'https://insight-gen-api-production.up.railway.app
+const BACKEND_URL = 'https://insight-gen-api-production.up.railway.app'
 
 Export to Sheets
 2';
