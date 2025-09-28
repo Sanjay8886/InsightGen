@@ -1,0 +1,10 @@
+
+# Ignore environment files
+.env
+frontend/.env
+backend/.env
+
+# Optional: common ignores
+node_modules/
+dist/
+build/
