@@ -4,9 +4,6 @@ import { Menu, Zap, Upload, FileText, Send, X, Plus, Mic, CheckCircle, AlertTria
 // --- Configuration ---
 const BACKEND_URL = 'https://insight-gen-api-production.up.railway.app';
 
-Export to Sheets
-2';
-
 // --- Global Style Reset Component (Fixes 100vh overflow issue) ---
 const GlobalStyleReset = () => (
     <style>
