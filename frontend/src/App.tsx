@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect, FormEvent } from 'react';
 import { Menu, Zap, Upload, FileText, Send, X, Plus, Mic, CheckCircle, AlertTriangle, Loader2, Code, Table } from 'lucide-react';
 
 // --- Configuration ---
-// NOTE: This URL is for demonstration and requires a running Python/Flask backend.
-// *** CRITICAL FIX: Changing port to 5001 to avoid host port conflicts via Docker. ***
-const BACKEND_URL = 'http://localhost:5001';
+const BACKEND_URL = 'https://insight-gen-api-production.up.railway.app
+
+Export to Sheets
+2';
 
 // --- Global Style Reset Component (Fixes 100vh overflow issue) ---
 const GlobalStyleReset = () => (
