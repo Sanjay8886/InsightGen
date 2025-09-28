@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # --- Backend Service (Python/Flask/Gunicorn) ---
+  backend:
+    # Context should point to the directory containing the Dockerfile and source code
+    build:
+      context: ./backend 
+      dockerfile: Dockerfile 
+    # Map container port 5001 to host port 5001
+    ports:
+      - "5001:5001" 
+    # Pass the API key securely from your host environment
+    environment:
+      GEMINI_API_KEY: "${GEMINI_API_KEY}" 
+    # Mount the local 'backend' folder for real-time code changes (development)
+    volumes:
+      - ./backend:/app
+    # Uses the Gunicorn CMD defined in the Dockerfile
+    restart: always
+
+  # --- Frontend Service (Node/Vite/React) ---
+  frontend:
+    # Context should point to the directory containing the Dockerfile and source code
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile 
+    # Map container port 3000 to host port 3000 (accessible via localhost:3000)
+    ports:
+      - "3000:3000" 
+    # Important: This tells the Vite/React app how to reach the backend service *internally*
+    environment:
+      # Use the service name 'backend' and the internal port 5001
+      VITE_BACKEND_URL: "http://backend:5001" 
+    # Mount the local 'frontend' folder for real-time code changes (development)
+    volumes:
+      - ./frontend:/app
+      # This volume explicitly excludes node_modules from the host mount, 
+      # ensuring dependencies installed inside the container are used.
+      - /app/node_modules 
+    # Ensures the backend is running before the frontend attempts to start
+    depends_on:
+      - backend
+    restart: always

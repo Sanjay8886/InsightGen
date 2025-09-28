@@ -1,0 +1,16 @@
+/*
+ * Tailwind CSS Directives
+ * These are required for Tailwind to inject its base styles, components,
+ * and utilities into your application.
+ *
+ * Make sure this file is imported into your main application entry point (e.g., src/main.tsx).
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can add custom global styles here if needed */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f7f9; /* Light grey background */
+}
